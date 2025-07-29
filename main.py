@@ -3,10 +3,11 @@ import pygame
 from constants import *
 
 def main():
-    # Initialise pygame
-    pygame.init()
+    pygame.init() # Initialise pygame
     # Initialise screen to given dimensions in a GUI window
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    clock = pygame.time.Clock() # Initialise clock for screen
+    dt = 0
 
     # Infinite loop to draw game on screen
     while True:
@@ -17,6 +18,7 @@ def main():
 
         screen.fill("black") # Fill the screen with solid black
         pygame.display.flip() # Refresh the screen
+        dt = clock.tick(60) / 1000 # Limit framerate to 60 FPS
 
 if __name__ == "__main__":
     main()
