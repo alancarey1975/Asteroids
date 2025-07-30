@@ -8,7 +8,10 @@ def main():
     # Initialise screen to given dimensions in a GUI window
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock() # Initialise clock for screen
-    dt = 0
+    dt = 0 # Time delta
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
     player = Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2) # Initialise a player in the middle of the screen
 
     # Infinite loop to draw game on screen
@@ -19,8 +22,9 @@ def main():
                 return
 
         screen.fill("black") # Fill the screen with solid black
-        player.update(dt)
-        player.draw(screen) # Draw the player object on the screen
+        updatable.update(dt)
+        for item in drawable:    
+            item.draw(screen) # Draw the player object on the screen
         pygame.display.flip() # Refresh the screen
         dt = clock.tick(60) / 1000 # Limit framerate to 60 FPS
 
